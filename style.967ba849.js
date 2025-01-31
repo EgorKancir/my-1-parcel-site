@@ -117,167 +117,62 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"src/test.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.average = average;
-function average(numbers) {
-  var sum = numbers.reduce(function (acc, num) {
-    return acc + num;
-  }, 0);
-  return sum / numbers.length;
-}
-},{}],"src/calculator/add.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.add = add;
-function add(a, b) {
-  return a + b;
-}
-},{}],"src/calculator/subtract.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.subtract = subtract;
-function subtract(a, b) {
-  return a - b;
-}
-},{}],"src/calculator/multiply.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.multiply = multiply;
-function multiply(a, b) {
-  return a * b;
-}
-},{}],"src/calculator/divide.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.divide = divide;
-function divide(a, b) {
-  if (b !== 0) {
-    return a / b;
-  } else {
-    console.log("Error");
+})({"node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
   }
+  return bundleURL;
 }
-},{}],"src/calculator/print-result.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.printResult = printResult;
-function printResult(result) {
-  console.log(result);
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+  return '/';
 }
-},{}],"src/sum.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.sumFun = sumFun;
-function sumFun(numbers) {
-  var arrSum = numbers.reduce(function (acc, num) {
-    return acc + num;
-  }, 0);
-  return arrSum;
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)?\/[^/]+(?:\?.*)?$/, '$1') + '/';
 }
-},{}],"src/hw-code.js":[function(require,module,exports) {
-// ДЗ:
-
-// Main form
-
-var sendBtn = document.getElementById("send-btn");
-var firstName = document.getElementById("user-first-name");
-var lastName = document.getElementById("user-last-name");
-var age = document.getElementById("user-age");
-var city = document.getElementById("user-city");
-
-// InfoBox
-
-var userInfoBoxFirstName = document.querySelector(".user-info-box__first-name");
-var userInfoBoxLastName = document.querySelector(".user-info-box__last-name");
-var userInfoBoxAge = document.querySelector(".user-info-box__age");
-var userInfoBoxCity = document.querySelector(".user-info-box__user-city");
-var userInfo = {
-  firstName: "",
-  lastName: "",
-  age: 0,
-  city: ""
-};
-function cliningInput() {
-  firstName.value = "";
-  lastName.value = "";
-  age.value = "";
-  city.value = "";
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+function updateLink(link) {
+  var newLink = link.cloneNode();
+  newLink.onload = function () {
+    link.remove();
+  };
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
 }
-function userInfoBoxFun(userObject) {
-  userInfoBoxFirstName.textContent = "First name: ".concat(userObject.firstName);
-  userInfoBoxLastName.textContent = "Last name: ".concat(userObject.lastName);
-  userInfoBoxAge.textContent = "Age: ".concat(userObject.age);
-  userInfoBoxCity.textContent = "City: ".concat(userObject.city);
+var cssTimeout = null;
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+    cssTimeout = null;
+  }, 50);
 }
-;
-sendBtn.addEventListener('click', function (event) {
-  event.preventDefault();
-  userInfo.firstName = firstName.value.trim();
-  userInfo.lastName = lastName.value.trim();
-  userInfo.age = age.value.trim();
-  userInfo.city = city.value.trim();
-  userInfoBoxFun(userInfo);
-  console.log(userInfo);
-  alert("Registration PERFEKT 👌🏻");
-  cliningInput();
-});
-},{}],"src/index.js":[function(require,module,exports) {
-"use strict";
-
-var _test = require("./test");
-var _add = require("./calculator/add");
-var _subtract = require("./calculator/subtract");
-var _multiply = require("./calculator/multiply");
-var _divide = require("./calculator/divide");
-var _printResult = require("./calculator/print-result");
-var _sum = require("./sum");
-require("./hw-code");
-// 1
-
-var numbers = [1, 2, 3, 4, 5];
-var avg = (0, _test.average)(numbers);
-console.log("Average: ".concat(avg));
-
-// 2
-
-var a = 10;
-var b = 5;
-var sum = (0, _add.add)(a, b);
-var difference = (0, _subtract.subtract)(a, b);
-var product = (0, _multiply.multiply)(a, b);
-var quotient = (0, _divide.divide)(a, b);
-(0, _printResult.printResult)(sum);
-(0, _printResult.printResult)(difference);
-(0, _printResult.printResult)(product);
-(0, _printResult.printResult)(quotient);
-
-// 3
-var result = (0, _sum.sumFun)(numbers);
-console.log("Sum: ".concat(result));
-},{"./test":"src/test.js","./calculator/add":"src/calculator/add.js","./calculator/subtract":"src/calculator/subtract.js","./calculator/multiply":"src/calculator/multiply.js","./calculator/divide":"src/calculator/divide.js","./calculator/print-result":"src/calculator/print-result.js","./sum":"src/sum.js","./hw-code":"src/hw-code.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+module.exports = reloadCSS;
+},{"./bundle-url":"node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"src/css/style.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -446,5 +341,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","src/index.js"], null)
-//# sourceMappingURL=/src.a2b27638.js.map
+},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
+//# sourceMappingURL=/style.967ba849.js.map
