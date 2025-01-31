@@ -41,8 +41,12 @@ sendBtn.addEventListener('click', (event) => {
     userInfo.lastName = lastName.value.trim();
     userInfo.age = age.value.trim();
     userInfo.city = city.value.trim();
-    userInfoBoxFun(userInfo);
-    console.log(userInfo);
-    alert("Registration PERFEKT 👌🏻");
-    cliningInput();
+    if (userInfo.firstName.length !== 0 && userInfo.lastName.length !== 0 && userInfo.age.length !== 0 && userInfo.city.length !== 0) {
+        userInfoBoxFun(userInfo);
+        console.log(userInfo);
+        alert("Registration PERFEKT 👌🏻");
+        cliningInput();
+    } else {
+        alert("Complete all information!");
+    }
 });
