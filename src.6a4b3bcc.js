@@ -17,4 +17,4 @@ var e=document.getElementById("send-btn"),t=document.getElementById("user-first-
 },{}],"H99C":[function(require,module,exports) {
 "use strict";var r=require("./test"),e=require("./calculator/add"),t=require("./calculator/subtract"),u=require("./calculator/multiply"),a=require("./calculator/divide"),l=require("./calculator/print-result"),c=require("./sum");require("./hw-code");var i=[1,2,3,4,5],o=(0,r.average)(i);console.log("Average: ".concat(o));var s=10,n=5,d=(0,e.add)(s,n),q=(0,t.subtract)(s,n),v=(0,u.multiply)(s,n),p=(0,a.divide)(s,n);(0,l.printResult)(d),(0,l.printResult)(q),(0,l.printResult)(v),(0,l.printResult)(p);var m=(0,c.sumFun)(i);console.log("Sum: ".concat(m));
 },{"./test":"sLe2","./calculator/add":"dRZY","./calculator/subtract":"oWdf","./calculator/multiply":"Vdjb","./calculator/divide":"o4aX","./calculator/print-result":"GPMD","./sum":"OtGi","./hw-code":"G5lg"}]},{},["H99C"], null)
-//# sourceMappingURL=https://github.com/EgorKancir/my-1-parcel-site.git/src.6a4b3bcc.js.map
+//# sourceMappingURL=/my-1-parcel-site/src.6a4b3bcc.js.map
