@@ -117,9 +117,167 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"src/index.js":[function(require,module,exports) {
+})({"src/test.js":[function(require,module,exports) {
+"use strict";
 
-},{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.average = average;
+function average(numbers) {
+  var sum = numbers.reduce(function (acc, num) {
+    return acc + num;
+  }, 0);
+  return sum / numbers.length;
+}
+},{}],"src/calculator/add.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.add = add;
+function add(a, b) {
+  return a + b;
+}
+},{}],"src/calculator/subtract.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.subtract = subtract;
+function subtract(a, b) {
+  return a - b;
+}
+},{}],"src/calculator/multiply.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.multiply = multiply;
+function multiply(a, b) {
+  return a * b;
+}
+},{}],"src/calculator/divide.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.divide = divide;
+function divide(a, b) {
+  if (b !== 0) {
+    return a / b;
+  } else {
+    console.log("Error");
+  }
+}
+},{}],"src/calculator/print-result.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.printResult = printResult;
+function printResult(result) {
+  console.log(result);
+}
+},{}],"src/sum.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.sumFun = sumFun;
+function sumFun(numbers) {
+  var arrSum = numbers.reduce(function (acc, num) {
+    return acc + num;
+  }, 0);
+  return arrSum;
+}
+},{}],"src/hw-code.js":[function(require,module,exports) {
+// ДЗ:
+
+// Main form
+
+var sendBtn = document.getElementById("send-btn");
+var firstName = document.getElementById("user-first-name");
+var lastName = document.getElementById("user-last-name");
+var age = document.getElementById("user-age");
+var city = document.getElementById("user-city");
+
+// InfoBox
+
+var userInfoBoxFirstName = document.querySelector(".user-info-box__first-name");
+var userInfoBoxLastName = document.querySelector(".user-info-box__last-name");
+var userInfoBoxAge = document.querySelector(".user-info-box__age");
+var userInfoBoxCity = document.querySelector(".user-info-box__user-city");
+var userInfo = {
+  firstName: "",
+  lastName: "",
+  age: 0,
+  city: ""
+};
+function cliningInput() {
+  firstName.value = "";
+  lastName.value = "";
+  age.value = "";
+  city.value = "";
+}
+function userInfoBoxFun(userObject) {
+  userInfoBoxFirstName.textContent = "First name: ".concat(userObject.firstName);
+  userInfoBoxLastName.textContent = "Last name: ".concat(userObject.lastName);
+  userInfoBoxAge.textContent = "Age: ".concat(userObject.age);
+  userInfoBoxCity.textContent = "City: ".concat(userObject.city);
+}
+;
+sendBtn.addEventListener('click', function (event) {
+  event.preventDefault();
+  userInfo.firstName = firstName.value.trim();
+  userInfo.lastName = lastName.value.trim();
+  userInfo.age = age.value.trim();
+  userInfo.city = city.value.trim();
+  userInfoBoxFun(userInfo);
+  console.log(userInfo);
+  alert("Registration PERFEKT 👌🏻");
+  cliningInput();
+});
+},{}],"src/index.js":[function(require,module,exports) {
+"use strict";
+
+var _test = require("./test");
+var _add = require("./calculator/add");
+var _subtract = require("./calculator/subtract");
+var _multiply = require("./calculator/multiply");
+var _divide = require("./calculator/divide");
+var _printResult = require("./calculator/print-result");
+var _sum = require("./sum");
+require("./hw-code");
+// 1
+
+var numbers = [1, 2, 3, 4, 5];
+var avg = (0, _test.average)(numbers);
+console.log("Average: ".concat(avg));
+
+// 2
+
+var a = 10;
+var b = 5;
+var sum = (0, _add.add)(a, b);
+var difference = (0, _subtract.subtract)(a, b);
+var product = (0, _multiply.multiply)(a, b);
+var quotient = (0, _divide.divide)(a, b);
+(0, _printResult.printResult)(sum);
+(0, _printResult.printResult)(difference);
+(0, _printResult.printResult)(product);
+(0, _printResult.printResult)(quotient);
+
+// 3
+var result = (0, _sum.sumFun)(numbers);
+console.log("Sum: ".concat(result));
+},{"./test":"src/test.js","./calculator/add":"src/calculator/add.js","./calculator/subtract":"src/calculator/subtract.js","./calculator/multiply":"src/calculator/multiply.js","./calculator/divide":"src/calculator/divide.js","./calculator/print-result":"src/calculator/print-result.js","./sum":"src/sum.js","./hw-code":"src/hw-code.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -144,7 +302,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50332" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50580" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
